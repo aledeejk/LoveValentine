@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To my valentine ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Падающие сердечки */
+        .heart {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Контейнер с открыткой */
+        .card-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            transform: scale(0.95);
+            animation: appear 1s ease-out forwards;
+            border: 8px double #ff6b8b;
+        }
+
+        @keyframes appear {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Заголовок */
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem; /* Уменьшено с 4.5rem */
+            color: #ff3366;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.3rem; /* Уменьшено с 1.8rem */
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        /* Кнопка */
+        .open-btn {
+            background: linear-gradient(to right, #ff3366, #ff6b8b);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.3rem; /* Уменьшено с 1.5rem */
+            font-family: 'Playfair Display', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        .open-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 51, 102, 0.4);
+            background: linear-gradient(to right, #ff6b8b, #ff3366);
+        }
+
+        .open-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Стрелочка */
+        .arrow {
+            display: block;
+            margin: 20px auto 0;
+            font-size: 2.5rem; /* Уменьшено с 3rem */
+            color: #ff3366;
+            animation: bounce 1.5s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        /* Декоративные элементы */
+        .heart-decoration {
+            position: absolute;
+            font-size: 35px; /* Уменьшено с 40px */
+            opacity: 0.7;
+        }
+
+        .heart-1 {
+            top: 20px;
+            left: 30px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .heart-2 {
+            bottom: 20px;
+            right: 30px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-12px) rotate(10deg);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.6rem; /* Уменьшено с 3.5rem */
+            }
+            
+            .subtitle {
+                font-size: 1.1rem; /* Уменьшено с 1.5rem */
+            }
+            
+            .card-container {
+                padding: 35px 25px;
+                margin: 20px;
+            }
+            
+            .open-btn {
+                padding: 14px 35px;
+                font-size: 1.1rem; /* Уменьшено с 1.3rem */
+            }
+            
+            .arrow {
+                font-size: 2.2rem; /* Уменьшено с 2.5rem */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.2rem; /* Уменьшено с 2.8rem */
+            }
+            
+            .subtitle {
+                font-size: 1rem; /* Уменьшено с 1.2rem */
+            }
+            
+            .open-btn {
+                padding: 12px 30px;
+                font-size: 1rem; /* Уменьшено с 1.1rem */
+            }
+            
+            .arrow {
+                font-size: 2rem; /* Уменьшено с 2.5rem */
+            }
+            
+            .heart-decoration {
+                font-size: 28px;
+            }
+        }
+        
+        /* Мелкие экраны */
+        @media (max-height: 700px) {
+            .card-container {
+                padding: 30px 25px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            
+            .open-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Падающие сердечки -->
+    <div id="hearts-container"></div>
+    
+    <!-- Декоративные сердечки -->
+    <div class="heart-decoration heart-1">❤️</div>
+    <div class="heart-decoration heart-2">❤️</div>
+    
+    <!-- Основной контент -->
+    <div class="card-container">
+        <h1 class="title"> Дорогой, с Днем Святого Валентина ❤️</h1>
+        <p class="subtitle">Да, возможно, это не такой уж и праздник, но ты для меня очень важен. Поэтому, может я и не могу подарить тебе подарок, но я могу потратить время и сделать для тебя что-то маленькое, но очень важное для меня и для тебя.</p>
+        
+        <button class="open-btn" onclick="openCard()">Открыть открытку ———></button>
+    </div>
+
+    <script>
+        // Создаем падающие сердечки
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15; /* Немного уменьшил количество сердечек */
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.fontSize = (Math.random() * 15 + 12) + 'px'; /* Уменьшил размер падающих сердечек */
+                container.appendChild(heart);
+            }
+        }
+        
+        // Функция перехода на вторую страницу
+        function openCard() {
+            // Анимация исчезновения
+            document.querySelector('.card-container').style.animation = 'appear 0.5s ease-out reverse forwards';
+            
+            // Ждем окончания анимации и переходим
+            setTimeout(() => {
+                window.location.href = 'card.html';
+            }, 500);
+        }
+        
+        // Инициализация
+        window.onload = function() {
+            createHearts();
+            
+            // Можно нажимать и на стрелочку, и на кнопку
+            document.querySelector('.arrow').addEventListener('click', openCard);
+            
+            // Также можно открыть по нажатию пробела или Enter
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' || e.code === 'Enter') {
+                    openCard();
+                }
+            });
+        };
+    </script>
+</body>
+</html>

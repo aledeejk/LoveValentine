@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our video ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+            position: relative;
+            padding: 10px;
+        }
+
+        /* Падающие сердечки */
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+
+        /* Открыточка сверху */
+        .header-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin: 30px auto 50px;
+            max-width: 800px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 6px double #ff6b8b;
+            text-align: center;
+            transform: translateY(20px);
+            animation: floatUp 0.8s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .header-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff3366;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Видео контейнер */
+        .video-section {
+            position: relative;
+            width: 100%;
+            margin: 40px 0 60px;
+        }
+
+        .video-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border: 8px solid #ff3366;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Стили для видео */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Соотношение 16:9 */
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        /* Подпись к видео */
+        .video-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff3366;
+            margin-top: 25px;
+            text-align: center;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ff9eb5;
+            max-width: 90%;
+        }
+
+        /* Кнопки контейнер */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px auto 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Общие стили для кнопок */
+        .action-btn {
+            background: linear-gradient(to right, #ff3366, #ff6b8b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 51, 102, 0.3);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 250px;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 51, 102, 0.4);
+            background: linear-gradient(to right, #ff6b8b, #ff3366);
+        }
+
+        /* Кнопка перехода к следующему видео */
+        .next-btn {
+            background: linear-gradient(to right, #667eea, #764ba2);
+        }
+
+        .next-btn:hover {
+            background: linear-gradient(to right, #764ba2, #667eea);
+        }
+
+        /* Кнопка назад */
+        .back-btn {
+            background: linear-gradient(to right, #ff3366, #ff6b8b);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(to right, #ff6b8b, #ff3366);
+        }
+
+        /* Декоративные сердечки */
+        .heart-decoration {
+            position: fixed;
+            font-size: 25px;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .heart-1 {
+            top: 40px;
+            left: 30px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .heart-2 {
+            bottom: 40px;
+            right: 30px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite 0.5s;
+        }
+
+        .heart-3 {
+            top: 100px;
+            right: 100px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite 1s;
+        }
+
+        .heart-4 {
+            bottom: 100px;
+            left: 100px;
+            color: #ff9eb5;
+            animation: float 4s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+
+        /* Инструкция по добавлению видео */
+        .video-instruction {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-card {
+                padding: 20px 25px;
+                margin: 20px auto 40px;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .header-text {
+                font-size: 1.1rem;
+            }
+            
+            .video-container {
+                padding: 20px;
+            }
+            
+            .video-caption {
+                font-size: 1.5rem;
+                padding: 12px 20px;
+            }
+            
+            .buttons-container {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+                min-width: 220px;
+            }
+            
+            .heart-3, .heart-4 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-card {
+                padding: 15px 20px;
+                margin: 15px auto 30px;
+            }
+            
+            .header-title {
+                font-size: 1.7rem;
+            }
+            
+            .header-text {
+                font-size: 1rem;
+            }
+            
+            .video-container {
+                padding: 15px;
+            }
+            
+            .video-caption {
+                font-size: 1.3rem;
+                padding: 10px 15px;
+            }
+            
+            .buttons-container {
+                gap: 15px;
+            }
+            
+            .action-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+                min-width: 200px;
+            }
+            
+            .video-instruction {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+
+        /* Анимация видео контейнера */
+        @keyframes videoAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .video-container {
+            animation: videoAppear 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Падающие сердечки -->
+    <div id="hearts-container"></div>
+    
+    <!-- Декоративные сердечки -->
+    <div class="heart-decoration heart-1">❤️</div>
+    <div class="heart-decoration heart-2">❤️</div>
+    <div class="heart-decoration heart-3">❤️</div>
+    <div class="heart-decoration heart-4">❤️</div>
+    
+    <div class="container">
+        <!-- Открыточка сверху -->
+        <div class="header-card">
+            <h1 class="header-title">My love.. ❤️</h1>
+            <p class="header-text">Этот момент запечатлён в движении. Нажми play и давай вспомним его вместе!</p>
+            <p class="header-text">Поверь, выбирать из всех видео было очень сложно — каждое особенное. Но это точно одно из самых тёплых и запоминающихся.</p>
+        </div>
+        
+        <!-- Секция с видео -->
+        <div class="video-section">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <!-- Вставьте свое видео здесь -->
+                    <video class="video-player" controls poster="video-poster.jpg">
+                        <source src="1.mp4" type="video/mp4">
+                        <source src="1.webm" type="video/webm">
+                        Ваш браузер не поддерживает видео тег.
+                    </video>
+                    
+                </div>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <div class="video-caption">Видео, что оставило в моем сердце определенный след</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Кнопки действий -->
+        <div class="buttons-container">
+            <button class="action-btn back-btn" onclick="goBack()">
+                <span>←</span> Предыдущая страница
+            </button>
+            
+            <button class="action-btn next-btn" onclick="goToNextVideo()">
+                Перевернуть  страницу
+                <span>▶️</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Создаем падающие сердечки
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 4 + 's';
+                heart.style.opacity = Math.random() * 0.4 + 0.2;
+                heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        
+        // Функция возврата к фото
+        function goBack() {
+            document.querySelector('.container').style.opacity = '0';
+            document.querySelector('.container').style.transform = 'translateY(30px)';
+            document.querySelector('.container').style.transition = 'all 0.4s ease';
+            
+            setTimeout(() => {
+                window.location.href = 'card.html';
+            }, 400);
+        }
+        
+        // Функция перехода к следующему видео
+        function goToNextVideo() {
+            document.querySelector('.container').style.opacity = '0';
+            document.querySelector('.container').style.transform = 'translateY(30px)';
+            document.querySelector('.container').style.transition = 'all 0.4s ease';
+            
+            setTimeout(() => {
+                window.location.href = 'video1.html';
+            }, 400);
+        }
+        
+        // Автовоспроизведение видео при загрузке (опционально)
+        function setupVideo() {
+            const video = document.querySelector('.video-player');
+            if (video && video.tagName === 'VIDEO') {
+                // Можно добавить автовоспроизведение
+                // video.play().catch(e => console.log("Автовоспроизведение не сработало:", e));
+                
+                // Добавляем сердечки при клике на видео
+                video.addEventListener('click', function(e) {
+                    if (video.paused) {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '🎬';
+                        heart.style.position = 'fixed';
+                        heart.style.left = e.clientX + 'px';
+                        heart.style.top = e.clientY + 'px';
+                        heart.style.fontSize = '30px';
+                        heart.style.color = '#ff3366';
+                        heart.style.pointerEvents = 'none';
+                        heart.style.zIndex = '1000';
+                        heart.style.animation = 'clickHeart 1s forwards';
+                        
+                        document.body.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 1000);
+                    }
+                });
+            }
+        }
+        
+        // Стили для анимации сердечек при клике
+        const clickStyle = document.createElement('style');
+        clickStyle.textContent = `
+            @keyframes clickHeart {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-80px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(clickStyle);
+        
+        // Управление клавиатурой
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Escape') {
+                    goBack();
+                }
+                // Быстрые клавиши
+                if (e.code === 'KeyB' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    goBack();
+                }
+                if (e.code === 'KeyN' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    goToNextVideo();
+                }
+                // Управление видео
+                if (e.code === 'Space') {
+                    const video = document.querySelector('.video-player');
+                    if (video && video.tagName === 'VIDEO') {
+                        e.preventDefault();
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Инициализация
+        window.onload = function() {
+            createHearts();
+            setupVideo();
+            setupKeyboardControls();
+            
+            // Плавное появление контента
+            setTimeout(() => {
+                document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.container').style.transform = 'translateY(0)';
+                document.querySelector('.container').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            }, 100);
+        };
+    </script>
+</body>
+</html>
